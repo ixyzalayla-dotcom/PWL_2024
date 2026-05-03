@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\LevelController;
 
 // 1. Halaman Home
 Route::get('/', [HomeController::class, 'index']);
@@ -27,3 +28,7 @@ Route::get('/penjualan', [PenjualanController::class, 'index']);
 
 // 5. Halaman Transaksi
 Route::resource('transactions', TransactionController::class);
+
+// 6. Halaman Level (Praktikum 4 - DB Facade)
+Route::get('/level', [LevelController::class, 'index']);
+Route::post('/level/add', [LevelController::class, 'store']);
