@@ -9,7 +9,7 @@ Membuat file migrasi database dengan relasi foreign key menggunakan Laravel untu
 
 ## Struktur Database Final
 
-### Tabel Master (tanpa FK)
+### Business Tables (7)
 
 **1. m_level** - Master Level User
 ```sql
@@ -27,21 +27,18 @@ Membuat file migrasi database dengan relasi foreign key menggunakan Laravel untu
 - timestamps
 ```
 
-**3. m_supplier** - Master Supplier
+**3. users** - User Table (Standard Laravel)
 ```sql
 - id (PK) - bigint(20) unsigned
-- nama_supplier (varchar)
-- alamat (varchar, nullable)
-- telepon (varchar, nullable)
-- email (varchar, nullable)
+- name (varchar)
+- email (varchar, unique)
+- email_verified_at (timestamp, nullable)
+- password (varchar)
+- remember_token (varchar, nullable)
 - timestamps
 ```
 
----
-
-### Tabel dengan Foreign Key
-
-**4. m_user** - Master User (FK → m_level)
+**4. m_user** - Master User dengan Level (FK → m_level)
 ```sql
 - id (PK) - bigint(20) unsigned
 - username (varchar, unique)
@@ -64,10 +61,6 @@ Membuat file migrasi database dengan relasi foreign key menggunakan Laravel untu
 - stok (integer, default 0)
 - timestamps
 ```
-
----
-
-### Tabel Transaksi
 
 **6. t_penjualan** - Transaksi Penjualan (FK → m_user)
 ```sql
@@ -139,16 +132,15 @@ t_penjualan_detail
 database/migrations/
 ├── 2026_05_03_000000_create_m_level_table.php
 ├── 2026_05_03_000001_create_m_kategori_table.php
-├── 2026_05_03_000002_create_m_supplier_table.php
+├── 2026_05_03_000002_create_users_table.php ⭐ NEW
 ├── 2026_05_03_000003_create_m_user_table.php
 ├── 2026_05_03_000004_create_m_barang_table.php
 ├── 2026_05_03_000005_create_t_penjualan_table.php
 ├── 2026_05_03_000006_create_t_stok_table.php
 ├── 2026_05_03_000007_create_t_penjualan_detail_table.php
-├── 2026_05_03_000008_create_password_reset_tokens_table.php ⭐
-├── 2026_05_03_000009_create_personal_access_tokens_table.php ⭐
-├── 2026_05_03_000010_create_failed_jobs_table.php ⭐
-└── 2026_05_03_000011_create_sessions_table.php ⭐
+├── 2026_05_03_000008_create_password_reset_tokens_table.php
+├── 2026_05_03_000009_create_personal_access_tokens_table.php
+└── 2026_05_03_000010_create_failed_jobs_table.php
 ```
 
 ---
@@ -177,7 +169,7 @@ database/migrations/
 
 ---
 
-## Tabel Sistem Laravel (4)
+## Tabel Sistem Laravel (3)
 
 **9. password_reset_tokens** - Password Reset Tokens
 ```sql
@@ -210,16 +202,6 @@ database/migrations/
 - failed_at (timestamp)
 ```
 
-**12. sessions** - Session Management
-```sql
-- id (varchar, PK)
-- user_id (unsignedBigInteger, nullable, FK)
-- ip_address (varchar, nullable)
-- user_agent (text, nullable)
-- payload (longtext)
-- last_activity (integer, indexed)
-```
-
 ---
 
 ## Database Configuration
@@ -235,16 +217,17 @@ database/migrations/
 
 | Kategori | Tabel | Jumlah |
 |----------|-------|--------|
-| Master Data | m_level, m_kategori, m_supplier | 3 |
-| Master with FK | m_user, m_barang | 2 |
+| Master Data | m_level, m_kategori | 2 |
+| User Management | users, m_user | 2 |
+| Master Business | m_barang | 1 |
 | Transaksi | t_penjualan, t_stok, t_penjualan_detail | 3 |
-| Sistem Laravel | password_reset_tokens, personal_access_tokens, failed_jobs, sessions | 4 |
-| **TOTAL** | | **12** |
+| Sistem Laravel | password_reset_tokens, personal_access_tokens, failed_jobs | 3 |
+| **TOTAL** | | **11** |
 
 ---
 
 ## Status Akhir
 ✅ **SELESAI** - Database structure lengkap dan siap digunakan
-✅ **COMPLETE** - 12 tabel dengan relasi dan sistem Laravel
+✅ **CLEAN** - m_supplier dan sessions dihapus, users ditambahkan
 ✅ **TESTED** - Semua migrasi berhasil dijalankan
-✅ **PRODUCTION-READY** - Struktur sesuai ERD dan jobsheet
+✅ **PRODUCTION-READY** - Struktur sesuai kebutuhan POS system
