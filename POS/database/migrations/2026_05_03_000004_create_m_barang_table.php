@@ -17,12 +17,14 @@ return new class extends Migration
             $table->string('nama_barang');
             $table->text('deskripsi')->nullable();
             $table->unsignedBigInteger('kategori_id')->index();
+            $table->unsignedBigInteger('supplier_id')->index();
             $table->decimal('harga', 10, 2);
             $table->integer('stok')->default(0);
             $table->timestamps();
 
-            // Foreign key ke tabel m_kategori
+            // Foreign keys
             $table->foreign('kategori_id')->references('id')->on('m_kategori');
+            $table->foreign('supplier_id')->references('id')->on('m_supplier');
         });
     }
 

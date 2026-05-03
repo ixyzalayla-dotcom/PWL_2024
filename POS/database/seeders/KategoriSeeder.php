@@ -17,6 +17,8 @@ class KategoriSeeder extends Seeder
             ['nama_kategori' => 'Elektronik', 'deskripsi' => 'Produk elektronik', 'created_at' => now(), 'updated_at' => now()],
             ['nama_kategori' => 'Makanan', 'deskripsi' => 'Produk makanan dan minuman', 'created_at' => now(), 'updated_at' => now()],
             ['nama_kategori' => 'Pakaian', 'deskripsi' => 'Produk pakaian dan fashion', 'created_at' => now(), 'updated_at' => now()],
+            ['nama_kategori' => 'Perawatan', 'deskripsi' => 'Produk perawatan dan kecantikan', 'created_at' => now(), 'updated_at' => now()],
+            ['nama_kategori' => 'Mainan', 'deskripsi' => 'Produk mainan dan hiburan', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }
