@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Foreign key ke tabel m_user
-            $table->foreign('user_id')->references('id')->on('m_user');
+            $table->foreign('user_id')->references('user_id')->on('m_user');
         });
     }
 

@@ -12,16 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('m_user', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('user_id')->primary();
             $table->string('username', 20)->unique();
-            $table->string('email')->unique();
-            $table->unsignedBigInteger('level_id')->index(); // Indexing untuk foreignkey
-            $table->string('name');
+            $table->unsignedBigInteger('level_id')->index();
+            $table->string('nama');
             $table->string('password');
-            $table->rememberToken();
             $table->timestamps();
 
-            // Pendefinisikan foreign key pada kolom level_id mengacu pada kolom level_id di tabel m_level
+            // Foreign key pada kolom level_id mengacu pada kolom id di tabel m_level
             $table->foreign('level_id')->references('id')->on('m_level');
         });
     }
