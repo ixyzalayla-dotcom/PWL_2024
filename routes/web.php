@@ -16,6 +16,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route to POS System
+Route::get('/pos', function () {
+    return redirect('http://localhost:8002');
+});
+
 Route::get('/hello', function () {
     return "Hello";
 });
@@ -37,6 +43,3 @@ Route::get('/posts/{postId}/comments/{commentId}', function ($postId, $commentId
 Route::get('/articles/{id}', function ($id) {
     return "Halaman Artikel dengan ID " . $id;
 });
-use Illuminate\Support\Facades\Route;
-2. Route::get('/hello', function () {
-    return /"Hello";
