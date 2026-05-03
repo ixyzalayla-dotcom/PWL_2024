@@ -37,3 +37,6 @@ Route::get('/posts/{postId}/comments/{commentId}', function ($postId, $commentId
 Route::get('/articles/{id}', function ($id) {
     return "Halaman Artikel dengan ID " . $id;
 });
+use Illuminate\Support\Facades\Route;
+2. Route::get('/hello', function () {
+    return /"Hello";
