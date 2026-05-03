@@ -14,9 +14,9 @@ class LevelSeeder extends Seeder
     public function run(): void
     {
         DB::table('m_level')->insert([
-            ['level_name' => 'Admin', 'description' => 'Administrator', 'created_at' => now(), 'updated_at' => now()],
-            ['level_name' => 'Kasir', 'description' => 'Kasir', 'created_at' => now(), 'updated_at' => now()],
-            ['level_name' => 'Manajer', 'description' => 'Manajer Toko', 'created_at' => now(), 'updated_at' => now()],
+            ['level_kode' => 'ADM', 'level_nama' => 'Administrator', 'created_at' => now(), 'updated_at' => now()],
+            ['level_kode' => 'MNG', 'level_nama' => 'Manager', 'created_at' => now(), 'updated_at' => now()],
+            ['level_kode' => 'STF', 'level_nama' => 'Staff/Kasir', 'created_at' => now(), 'updated_at' => now()],
         ]);
     }
 }
