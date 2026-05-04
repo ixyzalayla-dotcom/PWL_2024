@@ -38,3 +38,11 @@ Route::delete('/level/{id}', [LevelController::class, 'destroy']);
 
 // 7. Halaman Kategori (Praktikum 5 - Query Builder)
 Route::get('/kategori', [KategoriController::class, 'index']);
+Route::post('/kategori/store', [KategoriController::class, 'store']);
+Route::put('/kategori/{id}', [KategoriController::class, 'update']);
+Route::delete('/kategori/{id}', [KategoriController::class, 'destroy']);
+
+// 8. Halaman User (Praktikum 6 - Eloquent Models)
+Route::get('/user', [UserController::class, 'index']);
+Route::post('/user/store', [UserController::class, 'store']);
+Route::put('/user/{id}', [UserController::class, 'update']);
