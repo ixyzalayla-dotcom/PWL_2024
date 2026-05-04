@@ -7,27 +7,18 @@ use Illuminate\Support\Facades\DB;
 
 class LevelController extends Controller
 {
-    /**
-     * Display a listing of all levels
-     */
     public function index()
     {
-        $levels = DB::table('m_level')->get();
-        return view('levels.index', ['levels' => $levels]);
-    }
+        // DB::insert('insert into m_level(level_kode, level_nama, created_at) values(?, ?, ?)', ['CUS', 'Pelanggan', now()]);
+        // return 'Insert data berhasil!';
 
-    /**
-     * Store a newly created level in database
-     */
-    public function store(Request $request)
-    {
-        DB::table('m_level')->insert([
-            'level_kode' => $request->level_kode,
-            'level_nama' => $request->level_nama,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        // $row = DB::update('update m_level set level_nama = ? where level_kode = ?', ['Customer', 'CUS']);
+        // return 'Update data berhasil!. Jumlah data yang diupdate: '.$row.' baris';
 
-        return redirect('/level')->with('success', 'Level berhasil ditambahkan');
+        // $row = DB::delete('delete from m_level where level_kode = ?', ['CUS']);
+        // return 'Delete data berhasil!. Jumlah data yang dihapus: '.$row.' baris';
+
+        $data = DB::select('select * from m_level');
+        return view('level', ['data' => $data]);
     }
 }

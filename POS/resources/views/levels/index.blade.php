@@ -80,6 +80,7 @@
                                     <th width="100">Kode</th>
                                     <th>Nama Level</th>
                                     <th width="150">Created At</th>
+                                    <th width="150">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,6 +90,18 @@
                                         <td><span class="badge bg-info">{{ $level->level_kode }}</span></td>
                                         <td><strong>{{ $level->level_nama }}</strong></td>
                                         <td>{{ $level->created_at->format('d/m/Y H:i') }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ $level->id }}">
+                                                <i class="fas fa-edit"></i> Edit
+                                            </button>
+                                            <form action="/level/{{ $level->id }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin hapus?')">
+                                                    <i class="fas fa-trash"></i> Hapus
+                                                </button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
