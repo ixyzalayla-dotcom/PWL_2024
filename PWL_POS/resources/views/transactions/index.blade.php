@@ -50,24 +50,33 @@
     <table>
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Tanggal</th>
                 <th>Produk</th>
-                <th>User</th>
+                <th>Kasir</th>
                 <th>Jumlah</th>
-                <th>Harga Satuan</th>
-                <th>Total</th>
+                <th>Total Harga</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($transactions as $transaction)
                 <tr>
-                    <td>{{ $transaction->created_at->format('d/m/Y H:i') }}</td>
-                    <td>{{ $transaction->product->name }}</td>
-                    <td>{{ $transaction->user->name }}</td>
-                    <td>{{ $transaction->quantity }}</td>
-                    <td>Rp {{ number_format($transaction->product->price, 0, ',', '.') }}</td>
-                    <td><strong>Rp {{ number_format($transaction->total_price, 0, ',', '.') }}</strong></td>
+                    <td>#{{ $transaction->id }}</td>
+                    <td>{{ $transaction->tanggal_penjualan->format('d/m/Y H:i') }}</td>
+                    <td>
+                        @if($transaction->details->count())
+                            @foreach($transaction->details as $detail)
+                                {{ $detail->product->nama_barang }}
+                                @if(!$loop->last)<br>@endif
+                            @endforeach
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>{{ $transaction->user->nama ?? '-' }}</td>
+                    <td>{{ $transaction->details->sum('jumlah') ?? '-' }}</td>
+                    <td><strong>Rp {{ number_format($transaction->total_harga, 0, ',', '.') }}</strong></td>
                     <td>
                         <div class="actions">
                             <a href="/transactions/{{ $transaction->id }}" class="btn-view">Lihat</a>

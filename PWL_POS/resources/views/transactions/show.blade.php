@@ -38,41 +38,48 @@
 
     <div class="detail-item">
         <div class="detail-label">Tanggal</div>
-        <div class="detail-value">{{ $transaction->created_at->format('d F Y H:i:s') }}</div>
+        <div class="detail-value">{{ $transaction->tanggal_penjualan->format('d F Y H:i:s') }}</div>
     </div>
 
     <div class="detail-item">
         <div class="detail-label">Produk</div>
-        <div class="detail-value">{{ $transaction->product->name }}</div>
+        <div class="detail-value">
+            @if($transaction->details->count())
+                @foreach($transaction->details as $detail)
+                    {{ $detail->product->nama_barang }}
+                    @if(!$loop->last)<br>@endif
+                @endforeach
+            @else
+                -
+            @endif
+        </div>
     </div>
 
     <div class="detail-item">
         <div class="detail-label">Kasir</div>
-        <div class="detail-value">{{ $transaction->user->name }}</div>
-    </div>
-
-    <div class="detail-item">
-        <div class="detail-label">Email Kasir</div>
-        <div class="detail-value">{{ $transaction->user->email }}</div>
-    </div>
-
-    <div class="detail-item">
-        <div class="detail-label">Kategori Produk</div>
-        <div class="detail-value">{{ $transaction->product->category->name }}</div>
+        <div class="detail-value">{{ $transaction->user->nama ?? '-' }}</div>
     </div>
 
     <div class="summary-box">
-        <div class="summary-row">
-            <span class="summary-label">Harga Satuan</span>
-            <span class="summary-value">Rp {{ number_format($transaction->product->price, 0, ',', '.') }}</span>
-        </div>
-        <div class="summary-row">
-            <span class="summary-label">Jumlah (Qty)</span>
-            <span class="summary-value">{{ $transaction->quantity }}</span>
-        </div>
+        @if($transaction->details->count())
+            @foreach($transaction->details as $detail)
+                <div class="summary-row">
+                    <span class="summary-label">{{ $detail->product->nama_barang }} - Harga Satuan</span>
+                    <span class="summary-value">Rp {{ number_format($detail->harga_satuan, 0, ',', '.') }}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Jumlah (Qty)</span>
+                    <span class="summary-value">{{ $detail->jumlah }}</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Subtotal</span>
+                    <span class="summary-value">Rp {{ number_format($detail->subtotal, 0, ',', '.') }}</span>
+                </div>
+            @endforeach
+        @endif
         <div class="summary-row">
             <span class="summary-label total-label">Total Harga</span>
-            <span class="summary-value total-value">Rp {{ number_format($transaction->total_price, 0, ',', '.') }}</span>
+            <span class="summary-value total-value">Rp {{ number_format($transaction->total_harga, 0, ',', '.') }}</span>
         </div>
     </div>
 

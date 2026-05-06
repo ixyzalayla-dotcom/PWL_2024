@@ -53,7 +53,7 @@
             <tr>
                 <th>Tanggal</th>
                 <th>Produk</th>
-                <th>User</th>
+                <th>Kasir</th>
                 <th>Jumlah</th>
                 <th>Total Harga</th>
             </tr>
@@ -61,11 +61,26 @@
         <tbody>
             @foreach($sales as $sale)
                 <tr>
-                    <td>{{ $sale->created_at->format('d/m/Y H:i') }}</td>
-                    <td>{{ $sale->product->name }}</td>
-                    <td>{{ $sale->user->name }}</td>
-                    <td>{{ $sale->quantity }}</td>
-                    <td>Rp {{ number_format($sale->total_price, 0, ',', '.') }}</td>
+                    <td>{{ $sale->tanggal_penjualan->format('d/m/Y H:i') }}</td>
+                    <td>
+                        @if($sale->details->count())
+                            @foreach($sale->details as $detail)
+                                {{ $detail->product->nama_barang }}
+                                @if(!$loop->last)<br>@endif
+                            @endforeach
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>{{ $sale->user->nama ?? '-' }}</td>
+                    <td>
+                        @if($sale->details->count())
+                            {{ $sale->details->sum('jumlah') }}
+                        @else
+                            -
+                        @endif
+                    </td>
+                    <td>Rp {{ number_format($sale->total_harga, 0, ',', '.') }}</td>
                 </tr>
             @endforeach
         </tbody>

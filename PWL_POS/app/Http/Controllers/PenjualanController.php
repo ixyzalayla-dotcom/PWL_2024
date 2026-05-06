@@ -10,8 +10,8 @@ class PenjualanController extends Controller
 {
     public function index()
     {
-        $sales = Sale::with(['product', 'user'])->latest()->get();
-        $totalSales = Sale::sum('total_price');
+        $sales = Sale::with(['user', 'details'])->latest()->get();
+        $totalSales = Sale::sum('total_harga');
         $totalTransactions = Sale::count();
         $products = Product::all();
         

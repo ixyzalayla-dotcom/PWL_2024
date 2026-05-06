@@ -10,25 +10,25 @@ class ProductController extends Controller
 {
     public function foodBeverage()
     {
-        $products = Category::where('name', 'Food & Beverage')->first()?->products ?? [];
+        $products = Category::where('nama_kategori', 'Food & Beverage')->first()?->products ?? [];
         return view('products.food-beverage', ['products' => $products]);
     }
 
     public function beautyHealth()
     {
-        $products = Category::where('name', 'Beauty & Health')->first()?->products ?? [];
+        $products = Category::where('nama_kategori', 'Beauty & Health')->first()?->products ?? [];
         return view('products.beauty-health', ['products' => $products]);
     }
 
     public function homeCare()
     {
-        $products = Category::where('name', 'Home Care')->first()?->products ?? [];
+        $products = Category::where('nama_kategori', 'Home Care')->first()?->products ?? [];
         return view('products.home-care', ['products' => $products]);
     }
 
     public function babyKid()
     {
-        $products = Category::where('name', 'Baby & Kid')->first()?->products ?? [];
+        $products = Category::where('nama_kategori', 'Baby & Kid')->first()?->products ?? [];
         return view('products.baby-kid', ['products' => $products]);
     }
 }
