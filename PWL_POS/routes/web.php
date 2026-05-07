@@ -21,9 +21,6 @@ Route::prefix('category')->group(function () {
     Route::get('/baby-kid', [ProductController::class, 'babyKid']);
 });
 
-// 3. Halaman User (Route Param)
-Route::get('/user/{id}/name/{name}', [UserController::class, 'profile']);
-
 // 4. Halaman Penjualan
 Route::get('/penjualan', [PenjualanController::class, 'index']);
 
@@ -42,7 +39,13 @@ Route::post('/kategori/store', [KategoriController::class, 'store']);
 Route::put('/kategori/{id}', [KategoriController::class, 'update']);
 Route::delete('/kategori/{id}', [KategoriController::class, 'destroy']);
 
-// 8. Halaman User (Praktikum 6 - Eloquent Models)
+// 8.Halaman User (Praktikum 6 - Eloquent Models)
 Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/tambah', [UserController::class, 'tambah']);
 Route::post('/user/store', [UserController::class, 'store']);
+Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
+Route::put('/user/ubah/simpan/{id}', [UserController::class, 'ubah_simpan']);
+Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 Route::put('/user/{id}', [UserController::class, 'update']);
+Route::get('/user/{id}/name/{name}', [UserController::class, 'profile']);
+Route::post('/user/tambah_simpan', [UserController::class, 'tambah_simpan']);
